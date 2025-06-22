@@ -10,13 +10,6 @@ interface ResetPasswordPageProps {
   }
 }
 
-// Required for static export - this will be a client-side page
-export async function generateStaticParams() {
-  // Return empty array - this page will be generated statically
-  // but the token will be handled client-side
-  return []
-}
-
 export default function ResetPasswordPage() {
   const params = useParams()
   const token = params.token as string
