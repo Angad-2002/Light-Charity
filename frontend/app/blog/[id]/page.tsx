@@ -361,10 +361,3 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
     </div>
   )
 }
-
-// Required for static export
-export async function generateStaticParams() {
-  // For blog posts, we can try to fetch existing posts or return empty array
-  // This will be handled client-side
-  return []
-}
