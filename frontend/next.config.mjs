@@ -9,9 +9,10 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  output: 'export',
+  // Temporarily disable static export to resolve build conflicts
+  // output: 'export',
   trailingSlash: true,
-  distDir: 'out',
+  // distDir: 'out',
 }
 
 export default nextConfig

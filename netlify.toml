@@ -1,6 +1,6 @@
 [build]
   base = "frontend"
-  publish = "out"
+  publish = ".next"
   command = "corepack enable && corepack prepare pnpm@9.0.0 --activate && pnpm install --shamefully-hoist --production=false && pnpm run build"
 
 [build.environment]
