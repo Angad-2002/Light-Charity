@@ -1,11 +1,11 @@
 [build]
   base = "frontend"
-  publish = "frontend/out"
-  command = "pnpm run build"
+  publish = "out"
+  command = "corepack enable && corepack prepare pnpm@latest --activate && pnpm install --shamefully-hoist && pnpm run build"
 
 [build.environment]
-  NODE_VERSION = "18"
-  PNPM_FLAGS = "--shamefully-hoist"
+  NODE_VERSION = "20"
+  COREPACK_ENABLE_STRICT = "0"
   CI = "false"
 
 [[plugins]]
