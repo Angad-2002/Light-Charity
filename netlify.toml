@@ -1,11 +1,12 @@
 [build]
   base = "frontend"
   publish = "out"
-  command = "corepack enable && corepack prepare pnpm@latest --activate && pnpm install --shamefully-hoist && pnpm run build"
+  command = "corepack enable && corepack prepare pnpm@9.0.0 --activate && pnpm install --shamefully-hoist --production=false && pnpm run build"
 
 [build.environment]
   NODE_VERSION = "20"
   COREPACK_ENABLE_STRICT = "0"
+  NODE_ENV = "development"
   CI = "false"
 
 [[plugins]]
