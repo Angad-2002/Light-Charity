@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'
 
 export interface User {
   _id: string
@@ -92,7 +92,7 @@ class AuthService {
       }
     }
 
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, config)
+    const response = await fetch(`${API_BASE_URL}/api${endpoint}`, config)
     const data = await response.json()
 
     if (!response.ok) {

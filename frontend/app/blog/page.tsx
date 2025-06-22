@@ -11,7 +11,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { useState, useEffect } from "react"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'
 
 interface BlogPost {
   _id: string
@@ -55,7 +55,7 @@ export default function BlogPage() {
   const fetchBlogs = async () => {
     try {
       setLoading(true)
-      const response = await fetch(`${API_BASE_URL}/blogs?status=published`)
+      const response = await fetch(`${API_BASE_URL}/api/blogs?status=published`)
       if (!response.ok) {
         throw new Error('Failed to fetch blogs')
       }

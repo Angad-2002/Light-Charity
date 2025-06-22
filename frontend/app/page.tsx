@@ -13,7 +13,7 @@ import { CalendarDays, Clock, Droplet, FileText, Heart, Users, Shield, Award, Ma
 import { useState, useEffect } from "react"
 import { useAuth } from "@/contexts/auth-context"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'
 
 interface BlogPost {
   _id: string
@@ -57,7 +57,7 @@ export default function Home() {
   const fetchLatestBlogs = async () => {
     try {
       setLoadingBlogs(true)
-      const response = await fetch(`${API_BASE_URL}/blogs?status=published`)
+      const response = await fetch(`${API_BASE_URL}/api/blogs?status=published`)
       if (response.ok) {
         const data = await response.json()
         setBlogPosts(data.slice(0, 3)) // Get latest 3 posts

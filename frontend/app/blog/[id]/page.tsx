@@ -9,7 +9,7 @@ import { CalendarIcon, Clock, Facebook, Linkedin, Twitter, ArrowLeft } from "luc
 import { useState, useEffect } from "react"
 import Image from "next/image"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'
 
 interface BlogPost {
   _id: string
@@ -47,7 +47,7 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
   const fetchBlogPost = async (id: string) => {
     try {
       setLoading(true)
-      const response = await fetch(`${API_BASE_URL}/blogs/${id}`)
+      const response = await fetch(`${API_BASE_URL}/api/blogs/${id}`)
       if (!response.ok) {
         throw new Error('Blog post not found')
       }
@@ -63,7 +63,7 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
 
   const fetchRelatedPosts = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/blogs?status=published`)
+      const response = await fetch(`${API_BASE_URL}/api/blogs?status=published`)
       if (response.ok) {
         const data = await response.json()
         // Get 3 random posts for related posts
