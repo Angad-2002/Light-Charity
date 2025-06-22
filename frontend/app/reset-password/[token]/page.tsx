@@ -1,13 +1,6 @@
 import { ResetPasswordForm } from "@/components/auth/reset-password-form"
 import { Logo } from "@/components/logo"
 
-// Generate static params for static export
-export async function generateStaticParams() {
-  // Reset password tokens are dynamic and cannot be predetermined
-  // Return empty array to allow static export but handle tokens dynamically
-  return []
-}
-
 interface ResetPasswordPageProps {
   params: {
     token: string

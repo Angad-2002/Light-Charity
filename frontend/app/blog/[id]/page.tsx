@@ -1,47 +1,15 @@
+"use client"
+
 import { NavBar } from "@/components/nav-bar"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { SocialShare } from "@/components/social-share"
 import Link from "next/link"
-import { CalendarIcon, Clock, ArrowLeft } from "lucide-react"
+import { CalendarIcon, Clock, Facebook, Linkedin, Twitter, ArrowLeft } from "lucide-react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
-import { notFound } from "next/navigation"
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'
-
-// Generate static params for static export
-export async function generateStaticParams() {
-  try {
-    // In production, fetch from API
-    if (API_BASE_URL.includes('localhost')) {
-      // For development/build without backend, return sample params
-      return [
-        { id: 'sample-blog-post-1' },
-        { id: 'sample-blog-post-2' },
-        { id: 'sample-blog-post-3' },
-      ]
-    }
-
-    const response = await fetch(`${API_BASE_URL}/blogs?status=published`, {
-      cache: 'no-store'
-    })
-    
-    if (!response.ok) {
-      console.warn('Failed to fetch blog posts for static generation')
-      return []
-    }
-    
-    const posts = await response.json()
-    return posts.map((post: any) => ({
-      id: post._id
-    }))
-  } catch (error) {
-    console.warn('Error generating static params for blog:', error)
-    // Return empty array to allow build to continue
-    return []
-  }
-}
 
 interface BlogPost {
   _id: string
@@ -63,47 +31,48 @@ const categoryDisplayNames: Record<string, string> = {
   "story": "Stories"
 }
 
-async function fetchBlogPost(id: string): Promise<BlogPost | null> {
-  try {
-    const response = await fetch(`${API_BASE_URL}/blogs/${id}`, {
-      cache: 'no-store'
-    })
-    if (!response.ok) {
-      return null
-    }
-    return await response.json()
-  } catch (error) {
-    console.error('Error fetching blog post:', error)
-    return null
-  }
-}
+export default function BlogPostPage({ params }: { params: { id: string } }) {
+  const [post, setPost] = useState<BlogPost | null>(null)
+  const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
-async function fetchRelatedPosts(): Promise<BlogPost[]> {
-  try {
-    const response = await fetch(`${API_BASE_URL}/blogs?status=published`, {
-      cache: 'no-store'
-    })
-    if (response.ok) {
+  useEffect(() => {
+    if (params.id) {
+      fetchBlogPost(params.id)
+      fetchRelatedPosts()
+    }
+  }, [params.id])
+
+  const fetchBlogPost = async (id: string) => {
+    try {
+      setLoading(true)
+      const response = await fetch(`${API_BASE_URL}/blogs/${id}`)
+      if (!response.ok) {
+        throw new Error('Blog post not found')
+      }
       const data = await response.json()
-      // Get 3 random posts for related posts
-      const shuffled = data.sort(() => 0.5 - Math.random())
-      return shuffled.slice(0, 3)
+      setPost(data)
+    } catch (error) {
+      console.error('Error fetching blog post:', error)
+      setError('Failed to load blog post')
+    } finally {
+      setLoading(false)
     }
-    return []
-  } catch (error) {
-    console.error('Error fetching related posts:', error)
-    return []
   }
-}
 
-export default async function BlogPostPage({ params }: { params: { id: string } }) {
-  const [post, relatedPosts] = await Promise.all([
-    fetchBlogPost(params.id),
-    fetchRelatedPosts()
-  ])
-
-  if (!post) {
-    notFound()
+  const fetchRelatedPosts = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/blogs?status=published`)
+      if (response.ok) {
+        const data = await response.json()
+        // Get 3 random posts for related posts
+        const shuffled = data.sort(() => 0.5 - Math.random())
+        setRelatedPosts(shuffled.slice(0, 3))
+      }
+    } catch (error) {
+      console.error('Error fetching related posts:', error)
+    }
   }
 
   const formatDate = (dateString: string) => {
@@ -129,7 +98,70 @@ export default async function BlogPostPage({ params }: { params: { id: string } 
       : plainText
   }
 
+  const shareOnSocial = (platform: string) => {
+    if (!post) return
+    
+    const url = encodeURIComponent(window.location.href)
+    const text = encodeURIComponent(post.title)
+    
+    let shareUrl = ''
+    switch (platform) {
+      case 'facebook':
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`
+        break
+      case 'twitter':
+        shareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`
+        break
+      case 'linkedin':
+        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`
+        break
+    }
+    
+    if (shareUrl) {
+      window.open(shareUrl, '_blank', 'width=600,height=400')
+    }
+  }
 
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <NavBar />
+        <main className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Loading article...</p>
+          </div>
+        </main>
+      </div>
+    )
+  }
+
+  if (error || !post) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <NavBar />
+        <main className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold mb-4">Article Not Found</h1>
+            <p className="text-muted-foreground mb-6">
+              {error || "The article you're looking for doesn't exist or has been removed."}
+            </p>
+            <div className="flex gap-4 justify-center">
+              <Button asChild variant="outline">
+                <Link href="/blog">
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Back to Blog
+                </Link>
+              </Button>
+              <Button asChild>
+                <Link href="/">Go Home</Link>
+              </Button>
+            </div>
+          </div>
+        </main>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -206,8 +238,34 @@ export default async function BlogPostPage({ params }: { params: { id: string } 
 
                   <div className="bg-muted/50 p-6 rounded-lg">
                     <h3 className="font-bold text-lg mb-4">Share This Post</h3>
-                    <div className="flex justify-center">
-                      <SocialShare title={post.title} />
+                    <div className="flex justify-center gap-4">
+                      <Button 
+                        variant="outline" 
+                        size="icon" 
+                        className="rounded-full"
+                        onClick={() => shareOnSocial('facebook')}
+                      >
+                        <Facebook className="h-4 w-4" />
+                        <span className="sr-only">Share on Facebook</span>
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="icon" 
+                        className="rounded-full"
+                        onClick={() => shareOnSocial('twitter')}
+                      >
+                        <Twitter className="h-4 w-4" />
+                        <span className="sr-only">Share on Twitter</span>
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="icon" 
+                        className="rounded-full"
+                        onClick={() => shareOnSocial('linkedin')}
+                      >
+                        <Linkedin className="h-4 w-4" />
+                        <span className="sr-only">Share on LinkedIn</span>
+                      </Button>
                     </div>
                   </div>
 
