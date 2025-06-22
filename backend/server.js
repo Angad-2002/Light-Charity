@@ -13,8 +13,9 @@ const app = express();
 const corsOptions = {
     origin: [
         'http://localhost:3000',
-        'https://your-netlify-app-name.netlify.app' // Replace with your actual Netlify URL
-    ],
+        'https://light-charity.netlify.app', // Replace with your actual Netlify URL
+        process.env.FRONTEND_URL // Add dynamic frontend URL from environment
+    ].filter(Boolean), // Remove any undefined values
     credentials: true
 };
 app.use(cors(corsOptions));
