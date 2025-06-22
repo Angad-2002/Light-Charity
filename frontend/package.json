@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "netlify-build": "npm install --legacy-peer-deps && npm run build"
+    "netlify-build": "pnpm install --shamefully-hoist && pnpm run build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
