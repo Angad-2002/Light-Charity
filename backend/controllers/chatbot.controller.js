@@ -18,26 +18,67 @@ const formatAIResponse = (response) => {
     // First, normalize line breaks
     formatted = formatted.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
     
+    // Remove stray asterisks that appear after bullet points or content
+    // This handles the specific issue from the examples where * appears after bullet point descriptions
+    formatted = formatted.replace(/([^*\n])\s*\*\s*$/gm, '$1');
+    formatted = formatted.replace(/([^*\n])\s*\*\s*([^\*])/g, '$1 $2');
+    
+    // Clean up multiple asterisks that aren't part of bold formatting
+    formatted = formatted.replace(/\*{3,}/g, '**');
+    
+    // Preserve and improve code blocks (triple backticks)
+    // Ensure proper spacing around code blocks
+    formatted = formatted.replace(/([^\n])\s*```/g, '$1\n\n```');
+    formatted = formatted.replace(/```\s*([^\n])/g, '```\n$1');
+    formatted = formatted.replace(/([^\n])\s*```\s*$/gm, '$1\n```\n\n');
+    
+    // Handle inline code (single backticks) - ensure no extra formatting
+    formatted = formatted.replace(/`([^`]+)`/g, '`$1`');
+    
     // Fix bullet points - ensure they're properly separated
-    formatted = formatted.replace(/([^:\n])\s*•\s*/g, '$1\n\n• ');
-    formatted = formatted.replace(/:\s*•\s*/g, ':\n\n• ');
-    formatted = formatted.replace(/^\s*•\s*/gm, '• ');
+    // Handle bullet points that come after colons or at start of lines
+    formatted = formatted.replace(/([^:\n])\s*•/g, '$1\n\n•');
+    formatted = formatted.replace(/:\s*•/g, ':\n\n•');
+    
+    // Ensure bullet points are properly spaced
+    formatted = formatted.replace(/^•\s*/gm, '• ');
+    formatted = formatted.replace(/\n•\s*/g, '\n• ');
     
     // Fix numbered lists - ensure they're properly separated  
-    formatted = formatted.replace(/([^:\n])\s*(\d+\.)\s*/g, '$1\n\n$2 ');
-    formatted = formatted.replace(/:\s*(\d+\.)\s*/g, ':\n\n$1 ');
-    formatted = formatted.replace(/^\s*(\d+\.)\s*/gm, '$1 ');
+    formatted = formatted.replace(/([^:\n])\s*(\d+\.)/g, '$1\n\n$2');
+    formatted = formatted.replace(/:\s*(\d+\.)/g, ':\n\n$1');
+    formatted = formatted.replace(/^(\d+\.)\s*/gm, '$1 ');
     
     // Fix headers - ensure proper spacing around them
     formatted = formatted.replace(/([^\n])\s*(#{1,6})\s*([^\n]+)/g, '$1\n\n$2 $3\n\n');
-    formatted = formatted.replace(/^\s*(#{1,6})\s*([^\n]+)/gm, '$1 $2\n\n');
+    formatted = formatted.replace(/^(#{1,6})\s*([^\n]+)/gm, '$1 $2\n\n');
     
-    // Fix bold sections that should be on their own lines
-    formatted = formatted.replace(/([^\n*])\s*\*\*([^*]+)\*\*:\s*/g, '$1\n\n**$2:**\n\n');
+    // Fix bold sections that should be on their own lines (but preserve inline bold)
+    formatted = formatted.replace(/([^\n*])\s*\*\*([^*\n]+)\*\*:\s*/g, '$1\n\n**$2:**\n\n');
+    
+    // Handle tables - ensure proper spacing
+    formatted = formatted.replace(/([^\n])\s*\|/g, '$1\n|');
+    formatted = formatted.replace(/\|\s*([^\n|])/g, '| $1');
+    
+    // Handle blockquotes - ensure proper spacing
+    formatted = formatted.replace(/([^\n])\s*>/g, '$1\n\n>');
+    formatted = formatted.replace(/^>\s*/gm, '> ');
+    
+    // Handle horizontal rules
+    formatted = formatted.replace(/([^\n])\s*---\s*/g, '$1\n\n---\n\n');
+    formatted = formatted.replace(/^-{3,}\s*/gm, '---\n\n');
     
     // Clean up excessive line breaks but preserve intentional spacing
     formatted = formatted.replace(/\n{4,}/g, '\n\n\n');
     formatted = formatted.replace(/\n{3}/g, '\n\n');
+    
+    // Clean up spaces before bullet points and other list items
+    formatted = formatted.replace(/\n\s+•/g, '\n•');
+    formatted = formatted.replace(/\n\s+(\d+\.)/g, '\n$1');
+    
+    // Ensure emojis have proper spacing (common in health/donation contexts)
+    formatted = formatted.replace(/([a-zA-Z])([🩸❤️🏥💉🆘⚡🎯📍💪👥🤝])/g, '$1 $2');
+    formatted = formatted.replace(/([🩸❤️🏥💉🆘⚡🎯📍💪👥🤝])([a-zA-Z])/g, '$1 $2');
     
     // Clean up leading/trailing whitespace
     formatted = formatted.trim();
@@ -66,15 +107,17 @@ const systemPrompt = `You are a friendly and knowledgeable AI assistant for Ligh
 **CRITICAL MARKDOWN FORMATTING RULES:**
 • **Use double line breaks** between sections and paragraphs (\\n\\n)
 • **For bullet points**: Always start each bullet point on a NEW LINE with proper spacing:
-  - Use • for bullet points (not -, not *, not +)
+  - Use • for bullet points (NEVER use -, *, or +)
   - Format: "\\n• First point\\n• Second point\\n• Third point\\n"
   - Never put multiple bullet points on the same line
+  - Never add asterisks (*) or other symbols after bullet point content
 • **For numbered lists**: Each number on a new line:
   - Format: "\\n1. First step\\n2. Second step\\n3. Third step\\n"
 • **For headers**: Use # ## ### with proper spacing:
   - Format: "\\n## Header Name\\n\\n" (note the double line breaks)
 • **For bold text**: Use **text** with spaces around important terms
 • **Always separate different sections with double line breaks (\\n\\n)**
+• **NEVER add stray asterisks (*) at the end of lines or after descriptions**
 
 **Response Structure Template:**
 \`\`\`
