@@ -38,10 +38,10 @@ export default function AboutPage() {
           <div className="container">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
               {[
-                { icon: Heart, label: "Blood Donations", value: "500K+", color: "text-red-500" },
-                { icon: Users, label: "Lives Saved", value: "1.5M+", color: "text-blue-500" },
-                { icon: MapPin, label: "Partner Hospitals", value: "200+", color: "text-green-500" },
-                { icon: Globe, label: "Donation Centers", value: "50+", color: "text-orange-500" },
+                { icon: Heart, label: "Blood Donations", value: "0", color: "text-red-500" },
+                { icon: Users, label: "Lives Saved", value: "0", color: "text-blue-500" },
+                { icon: MapPin, label: "Partner Hospitals", value: "0", color: "text-green-500" },
+                { icon: Globe, label: "Donation Centers", value: "0", color: "text-orange-500" },
               ].map((stat, index) => (
                 <Card
                   key={index}
@@ -124,19 +124,19 @@ export default function AboutPage() {
                   <CardContent className="p-8">
                     <div className="grid grid-cols-2 gap-6">
                       <div className="text-center">
-                        <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">500K+</div>
+                        <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">0</div>
                         <div className="text-sm text-muted-foreground">Blood Donations</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-3xl font-bold text-red-600 dark:text-red-400 mb-2">1.5M+</div>
+                        <div className="text-3xl font-bold text-red-600 dark:text-red-400 mb-2">0</div>
                         <div className="text-sm text-muted-foreground">Lives Saved</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">200+</div>
+                        <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">0</div>
                         <div className="text-sm text-muted-foreground">Partner Hospitals</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-3xl font-bold text-red-600 dark:text-red-400 mb-2">50+</div>
+                        <div className="text-3xl font-bold text-red-600 dark:text-red-400 mb-2">0</div>
                         <div className="text-sm text-muted-foreground">Donation Centers</div>
                       </div>
                     </div>

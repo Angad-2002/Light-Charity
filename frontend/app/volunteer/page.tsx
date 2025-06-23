@@ -86,8 +86,8 @@ const volunteerEvents = [
     date: "July 15, 2023",
     time: "9:00 AM - 3:00 PM",
     location: "Central Park Community Center",
-    volunteers: 8,
-    volunteersNeeded: 12,
+    volunteers: 0,
+    volunteersNeeded: 0,
     category: "Event Support",
   },
   {
@@ -96,8 +96,8 @@ const volunteerEvents = [
     date: "July 22, 2023",
     time: "10:00 AM - 12:00 PM",
     location: "Lincoln High School",
-    volunteers: 3,
-    volunteersNeeded: 5,
+    volunteers: 0,
+    volunteersNeeded: 0,
     category: "Outreach",
   },
   {
@@ -106,8 +106,8 @@ const volunteerEvents = [
     date: "August 5, 2023",
     time: "11:00 AM - 4:00 PM",
     location: "Tech Solutions Inc. Headquarters",
-    volunteers: 5,
-    volunteersNeeded: 10,
+    volunteers: 0,
+    volunteersNeeded: 0,
     category: "Event Support",
   },
 ]
@@ -141,10 +141,10 @@ export default function VolunteerPage() {
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
               {[
-                { icon: Users, label: "Active Volunteers", value: "450+", color: "text-blue-500" },
-                { icon: Clock, label: "Volunteer Hours This Month", value: "2,156", color: "text-green-500" },
-                { icon: Heart, label: "Lives Impacted", value: "8,924", color: "text-red-500" },
-                { icon: Globe, label: "Community Events", value: "125", color: "text-orange-500" },
+                { icon: Users, label: "Active Volunteers", value: "0", color: "text-blue-500" },
+                { icon: Clock, label: "Volunteer Hours This Month", value: "0", color: "text-green-500" },
+                { icon: Heart, label: "Lives Impacted", value: "0", color: "text-red-500" },
+                { icon: Globe, label: "Community Events", value: "0", color: "text-orange-500" },
               ].map((stat, index) => (
                 <Card key={index} className="text-center hover:shadow-lg transition-all duration-300">
                   <CardContent className="p-6">
@@ -372,11 +372,9 @@ export default function VolunteerPage() {
                   <UserCheck className="h-16 w-16 text-red-500" />
                 </div>
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-bold mb-2 text-foreground">Maria Rodriguez</h3>
-                  <p className="text-primary text-sm mb-4">Event Support Volunteer, 2 years</p>
+                  <h3 className="text-xl font-bold mb-2 text-foreground"></h3>
+                  <p className="text-primary text-sm mb-4"></p>
                   <p className="text-muted-foreground italic leading-relaxed">
-                    "Volunteering with Light Charity has been one of the most rewarding experiences of my life. Seeing
-                    the direct impact of our work on people's lives is incredibly fulfilling."
                   </p>
                 </CardContent>
               </Card>
@@ -386,11 +384,9 @@ export default function VolunteerPage() {
                   <UserCheck className="h-16 w-16 text-blue-500" />
                 </div>
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-bold mb-2 text-foreground">David Chen</h3>
-                  <p className="text-primary text-sm mb-4">Administrative Support, 1 year</p>
+                  <h3 className="text-xl font-bold mb-2 text-foreground"></h3>
+                  <p className="text-primary text-sm mb-4"></p>
                   <p className="text-muted-foreground italic leading-relaxed">
-                    "As someone who can't donate blood due to medical reasons, volunteering gives me a way to contribute
-                    to this important cause. I love knowing that my work helps the organization save lives."
                   </p>
                 </CardContent>
               </Card>
@@ -400,11 +396,9 @@ export default function VolunteerPage() {
                   <UserCheck className="h-16 w-16 text-green-500" />
                 </div>
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-bold mb-2 text-foreground">James Wilson</h3>
-                  <p className="text-primary text-sm mb-4">Transportation Volunteer, 3 years</p>
+                  <h3 className="text-xl font-bold mb-2 text-foreground"></h3>
+                  <p className="text-primary text-sm mb-4"></p>
                   <p className="text-muted-foreground italic leading-relaxed">
-                    "As a retired truck driver, volunteering as a transportation volunteer allows me to use my skills to
-                    help others. Knowing that I'm delivering life-saving blood gives me purpose."
                   </p>
                 </CardContent>
               </Card>

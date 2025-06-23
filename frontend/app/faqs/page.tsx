@@ -227,10 +227,10 @@ export default function FAQsPage() {
           <div className="container px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-16">
               {[
-                { icon: Heart, label: "Lives Saved Daily", value: "2,000+", color: "text-red-500" },
-                { icon: Users, label: "Active Donors", value: "50K+", color: "text-blue-500" },
-                { icon: Shield, label: "Safety Rate", value: "99.9%", color: "text-green-500" },
-                { icon: Clock, label: "Donation Time", value: "~1 Hour", color: "text-orange-500" },
+                { icon: Heart, label: "Lives Saved Daily", value: "0", color: "text-red-500" },
+                { icon: Users, label: "Active Donors", value: "0", color: "text-blue-500" },
+                { icon: Shield, label: "Safety Rate", value: "0%", color: "text-green-500" },
+                { icon: Clock, label: "Donation Time", value: "0 Minutes", color: "text-orange-500" },
               ].map((stat, index) => (
                 <Card key={index} className="text-center hover:shadow-lg transition-all duration-300">
                   <CardContent className="p-4 md:p-6">
