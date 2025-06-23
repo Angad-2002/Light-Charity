@@ -165,15 +165,15 @@ export default function Home() {
               {/* Stats */}
               <div className="grid grid-cols-3 gap-6 pt-8">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">10K+</div>
+                  <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">0</div>
                   <div className="text-sm text-muted-foreground">Lives Saved</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-red-600 dark:text-red-400">5K+</div>
+                  <div className="text-2xl font-bold text-red-600 dark:text-red-400">0</div>
                   <div className="text-sm text-muted-foreground">Active Donors</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">50+</div>
+                  <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">0</div>
                   <div className="text-sm text-muted-foreground">Centers</div>
                 </div>
               </div>
@@ -680,15 +680,15 @@ export default function Home() {
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <Phone className="h-4 w-4 text-orange-400" />
-                  <span className="text-gray-400">+1 (555) 123-4567</span>
+                  <span className="text-gray-400"></span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="h-4 w-4 text-orange-400" />
-                  <span className="text-gray-400">info@lightcharity.org</span>
+                  <span className="text-gray-400"></span>
                 </div>
                 <div className="flex items-center gap-3">
                   <MapPin className="h-4 w-4 text-orange-400" />
-                  <span className="text-gray-400">123 Hope Street, City, State 12345</span>
+                  <span className="text-gray-400"></span>
                 </div>
               </div>
 

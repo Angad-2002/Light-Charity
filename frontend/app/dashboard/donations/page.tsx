@@ -84,10 +84,10 @@ export default function DonationsPage() {
   )
 
   const stats = [
-    { title: "Total Donations", value: "1,234", change: "+12%", color: "text-red-500" },
-    { title: "This Month", value: "89", change: "+15%", color: "text-blue-500" },
-    { title: "Pending Tests", value: "23", change: "-5%", color: "text-orange-500" },
-    { title: "Success Rate", value: "98.5%", change: "+2%", color: "text-green-500" },
+    { title: "Total Donations", value: "0", change: "+0%", color: "text-red-500" },
+    { title: "This Month", value: "0", change: "+0%", color: "text-blue-500" },
+    { title: "Pending Tests", value: "0", change: "+0%", color: "text-orange-500" },
+    { title: "Success Rate", value: "0%", change: "+0%", color: "text-green-500" },
   ]
 
   if (isLoading) {

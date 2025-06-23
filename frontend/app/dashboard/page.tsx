@@ -35,22 +35,22 @@ export default function DashboardPage() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setBloodData([
-        { group: "A+", available: 8, required: 5, trend: "+12%" },
-        { group: "A-", available: 4, required: 6, trend: "-8%" },
-        { group: "B+", available: 7, required: 4, trend: "+5%" },
-        { group: "B-", available: 3, required: 5, trend: "-15%" },
-        { group: "AB+", available: 5, required: 3, trend: "+20%" },
-        { group: "AB-", available: 2, required: 4, trend: "-25%" },
-        { group: "O+", available: 9, required: 7, trend: "+8%" },
-        { group: "O-", available: 6, required: 8, trend: "-5%" },
+        { group: "A+", available: 0, required: 0, trend: "+0%" },
+        { group: "A-", available: 0, required: 0, trend: "+0%" },
+        { group: "B+", available: 0, required: 0, trend: "+0%" },
+        { group: "B-", available: 0, required: 0, trend: "+0%" },
+        { group: "AB+", available: 0, required: 0, trend: "+0%" },
+        { group: "AB-", available: 0, required: 0, trend: "+0%" },
+        { group: "O+", available: 0, required: 0, trend: "+0%" },
+        { group: "O-", available: 0, required: 0, trend: "+0%" },
       ])
 
       setRecentDonors([
-        { name: "John Doe", group: "O+", donations: 5, date: "2023-04-15", status: "active" },
-        { name: "Jane Smith", group: "A-", donations: 3, date: "2023-05-20", status: "active" },
-        { name: "Robert Johnson", group: "B+", donations: 8, date: "2023-03-10", status: "eligible" },
-        { name: "Emily Davis", group: "AB+", donations: 2, date: "2023-06-05", status: "active" },
-        { name: "Michael Wilson", group: "O-", donations: 6, date: "2023-02-28", status: "pending" },
+        { name: "John Doe", group: "O+", donations: 0, date: "2023-04-15", status: "active" },
+        { name: "Jane Smith", group: "A-", donations: 0, date: "2023-05-20", status: "active" },
+        { name: "Robert Johnson", group: "B+", donations: 0, date: "2023-03-10", status: "eligible" },
+        { name: "Emily Davis", group: "AB+", donations: 0, date: "2023-06-05", status: "active" },
+        { name: "Michael Wilson", group: "O-", donations: 0, date: "2023-02-28", status: "pending" },
       ])
 
       setIsLoading(false)
@@ -72,32 +72,32 @@ export default function DashboardPage() {
   const stats = [
     {
       title: "Total Donations",
-      value: "1,234",
-      change: "+12%",
+      value: "0",
+      change: "+0%",
       icon: Heart,
       color: "text-red-500",
       bgColor: "bg-red-50 dark:bg-red-950",
     },
     {
       title: "Active Donors",
-      value: "856",
-      change: "+8%",
+      value: "0",
+      change: "+0%",
       icon: Users,
       color: "text-blue-500",
       bgColor: "bg-blue-50 dark:bg-blue-950",
     },
     {
       title: "This Month",
-      value: "89",
-      change: "+15%",
+      value: "0",
+      change: "+0%",
       icon: Calendar,
       color: "text-green-500",
       bgColor: "bg-green-50 dark:bg-green-950",
     },
     {
       title: "Success Rate",
-      value: "98.5%",
-      change: "+2%",
+      value: "0%",
+      change: "+0%",
       icon: TrendingUp,
       color: "text-orange-500",
       bgColor: "bg-orange-50 dark:bg-orange-950",
