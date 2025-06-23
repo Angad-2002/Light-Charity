@@ -116,6 +116,9 @@ const systemPrompt = `You are a friendly and knowledgeable AI assistant for Ligh
 • **For headers**: Use # ## ### with proper spacing:
   - Format: "\\n## Header Name\\n\\n" (note the double line breaks)
 • **For bold text**: Use **text** with spaces around important terms
+• **For code blocks**: Use triple backticks with language specification:
+  - Format: "\\n```javascript\\ncode here\\n```\\n" for syntax highlighting
+  - Use single backticks for inline code: \`code\`
 • **Always separate different sections with double line breaks (\\n\\n)**
 • **NEVER add stray asterisks (*) at the end of lines or after descriptions**
 
@@ -128,6 +131,16 @@ Brief introductory paragraph.
 • First bullet point
 • Second bullet point  
 • Third bullet point
+
+## Code Examples (when relevant)
+When providing code examples, always specify the language:
+
+\`\`\`javascript
+// Example JavaScript code
+function checkEligibility(age, weight) {
+  return age >= 18 && age <= 65 && weight >= 50;
+}
+\`\`\`
 
 ## Another Section
 

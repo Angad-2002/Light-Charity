@@ -4,7 +4,9 @@ import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
-import 'highlight.js/styles/github.css'; // Add syntax highlighting styles
+import { PreWithCopy } from './pre-with-copy';
+import { rehypeExtractCode } from '../../lib/rehype-extract-code';
+import '../../styles/highlight.css';
 
 interface MessageRendererProps {
   content: string;
@@ -16,7 +18,7 @@ export function MessageRenderer({ content, className = "" }: MessageRendererProp
     <div className={`prose prose-sm max-w-none ${className}`}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeSanitize]}
+        rehypePlugins={[rehypeExtractCode, rehypeHighlight, rehypeRaw, rehypeSanitize]}
         components={{
           // Custom styling for different markdown elements
           h1: ({ children, ...props }) => (
@@ -112,9 +114,9 @@ export function MessageRenderer({ content, className = "" }: MessageRendererProp
             }
           },
           pre: ({ children, ...props }) => (
-            <pre className="bg-gray-50 dark:bg-gray-900 p-3 rounded-lg my-3 overflow-x-auto border border-gray-200 dark:border-gray-700" {...props}>
+            <PreWithCopy {...props}>
               {children}
-            </pre>
+            </PreWithCopy>
           ),
           blockquote: ({ children, ...props }) => (
             <blockquote className="border-l-4 border-orange-500 pl-4 py-2 my-3 bg-gray-50 dark:bg-gray-800/50 italic rounded-r" {...props}>

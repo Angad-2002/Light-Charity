@@ -24,6 +24,7 @@ import { useRouter } from "next/navigation"
 import { LoadingSpinner } from "@/components/ui/loading"
 import { cn } from "@/lib/utils"
 import { MessageRenderer } from "./message-renderer"
+import { CopyButton } from "./copy-button"
 
 interface Message {
   id: string
@@ -619,21 +620,35 @@ What specific information can I provide for you?`
 
                       <div
                         className={cn(
-                          "max-w-[80%] rounded-lg p-3 shadow-sm",
+                          "max-w-[80%] rounded-lg shadow-sm relative group",
                           message.sender === "user"
-                            ? "bg-gradient-to-r from-orange-500 to-red-500 text-white"
+                            ? "bg-gradient-to-r from-orange-500 to-red-500 text-white p-3"
                             : "bg-muted",
                         )}
                       >
                         {message.sender === "user" ? (
                           <p className="text-sm leading-relaxed">{message.content}</p>
                         ) : (
-                          <MessageRenderer 
-                            content={message.content} 
-                            className="text-gray-800 dark:text-gray-200"
-                          />
+                          <>
+                            {/* Copy button for bot responses */}
+                            <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
+                              <CopyButton 
+                                text={message.content}
+                                className="bg-white dark:bg-gray-800 shadow-md hover:shadow-lg"
+                              />
+                            </div>
+                            <div className="p-3">
+                              <MessageRenderer 
+                                content={message.content} 
+                                className="text-gray-800 dark:text-gray-200"
+                              />
+                            </div>
+                          </>
                         )}
-                        <p className="text-xs opacity-70 mt-2">
+                        <p className={cn(
+                          "text-xs opacity-70 mt-2",
+                          message.sender === "bot" ? "px-3 pb-3" : ""
+                        )}>
                           {message.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                         </p>
                       </div>
