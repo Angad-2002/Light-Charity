@@ -246,17 +246,6 @@ export default function AboutPage() {
         {/* Leadership Team */}
         <section className="py-20 bg-background">
           <div className="container">
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 bg-white dark:bg-gray-800 px-4 py-2 rounded-full mb-6 shadow-sm">
-                <Award className="h-5 w-5 text-primary" />
-                <span className="text-sm font-medium text-muted-foreground">Expert Leadership</span>
-              </div>
-              <h2 className="text-4xl font-bold mb-4 text-foreground">Our Valuable Partners</h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Meet the dedicated professionals leading our mission to save lives and serve communities.
-              </p>
-            </div>
-
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 {
