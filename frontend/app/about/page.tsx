@@ -246,35 +246,30 @@ export default function AboutPage() {
         {/* Leadership Team */}
         <section className="py-20 bg-background">
           <div className="container">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 bg-white dark:bg-gray-800 px-4 py-2 rounded-full mb-6 shadow-sm">
+                <Award className="h-5 w-5 text-primary" />
+                <span className="text-sm font-medium text-muted-foreground">Expert Leadership</span>
+              </div>
+              <h2 className="text-4xl font-bold mb-4 text-foreground">Our Valuable Partners</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Meet the dedicated professionals leading our mission to save lives and serve communities.
+              </p>
+            </div>
+
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 {
-                  name: "Dr. Sarah Johnson",
-                  role: "Founder & CEO",
-                  bio: "Hematologist with 15+ years of experience in blood banking and transfusion medicine.",
                   color: "from-orange-400 to-red-400",
-                  expertise: "Medical Leadership",
                 },
                 {
-                  name: "Michael Chen",
-                  role: "Chief Operations Officer",
-                  bio: "Former hospital administrator with expertise in healthcare logistics and operations.",
                   color: "from-red-400 to-orange-400",
-                  expertise: "Operations Management",
                 },
                 {
-                  name: "Dr. James Wilson",
-                  role: "Medical Director",
-                  bio: "Board-certified pathologist specializing in blood banking and transfusion medicine.",
                   color: "from-orange-500 to-red-500",
-                  expertise: "Clinical Excellence",
                 },
                 {
-                  name: "Emily Rodriguez",
-                  role: "Community Outreach Director",
-                  bio: "Public health expert with a passion for community engagement and education.",
                   color: "from-red-500 to-orange-500",
-                  expertise: "Community Relations",
                 },
               ].map((member, index) => (
                 <Card key={index} className="group hover:shadow-xl transition-all duration-300 overflow-hidden">
@@ -284,21 +279,9 @@ export default function AboutPage() {
                     >
                       <div className="absolute inset-0 bg-black/10"></div>
                       <div className="relative w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                        <span className="text-white text-2xl font-bold">
-                          {member.name
-                            .split(" ")
-                            .map((n) => n[0])
-                            .join("")}
-                        </span>
                       </div>
                     </div>
                     <div className="p-6">
-                      <h3 className="font-bold text-xl mb-1 text-foreground">{member.name}</h3>
-                      <p className="text-orange-600 dark:text-orange-400 font-medium mb-2">{member.role}</p>
-                      <Badge variant="secondary" className="mb-3 text-xs">
-                        {member.expertise}
-                      </Badge>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{member.bio}</p>
                     </div>
                   </CardContent>
                 </Card>
