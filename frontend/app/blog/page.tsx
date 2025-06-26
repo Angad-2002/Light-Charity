@@ -182,10 +182,10 @@ export default function BlogPage() {
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
               {[
-                { icon: Heart, label: "Lives Saved This Month", value: "1,247", color: "text-red-500" },
-                { icon: Users, label: "New Donors", value: "342", color: "text-blue-500" },
-                { icon: Award, label: "Volunteer Hours", value: "2,156", color: "text-green-500" },
-                { icon: TrendingUp, label: "Blood Units Collected", value: "892", color: "text-orange-500" },
+                { icon: Heart, label: "Lives Saved This Month", value: "0", color: "text-red-500" },
+                { icon: Users, label: "New Donors", value: "0", color: "text-blue-500" },
+                { icon: Award, label: "Volunteer Hours", value: "0", color: "text-green-500" },
+                { icon: TrendingUp, label: "Blood Units Collected", value: "0", color: "text-orange-500" },
               ].map((stat, index) => (
                 <Card key={index} className="text-center hover:shadow-lg transition-all duration-300">
                   <CardContent className="p-6">
